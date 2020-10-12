@@ -5,7 +5,9 @@ import React from 'react'
 class App extends React.Component {
   //建構式
   constructor() {
+    // 建構式的第一行需要使用super呼叫父母類別的建構式
     super()
+    // 這裡建立狀態的初始化值
     this.state = {
       total: 0,
     }
