@@ -9,8 +9,8 @@ function App() {
   return (
     <>
       {/* 使用類似HTML標記的方式來放置元件要呈現(渲染)的位置 */}
-      <AppClass />
-      <AppFunction />
+      <AppClass title="函式型元件" initValue={98} />
+      <AppFunction title="函式型元件" initValue={101} />
     </>
   )
 }
