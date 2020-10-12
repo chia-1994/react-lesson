@@ -1,30 +1,19 @@
-//導入react函式庫
+// 導入其它的模組
 import React from 'react'
 
-//繼承類別
-class App extends React.Component {
-  //建構式
-  constructor() {
-    super()
-    this.state = {
-      total: 0,
-    }
-  }
+// 導入要使用的元件程式，注意路徑要正確，不需要加副檔名
+import AppClass from './AppClass'
+import AppFunction from './AppFunction'
 
-  render() {
-    return (
-      <>
-        <h1>{this.state.total}</h1>
-        <button onClick={() => this.setState({ total: this.state.total + 1 })}>
-          +1
-        </button>
-        <button onClick={() => this.setState({ total: this.state.total - 1 })}>
-          -1
-        </button>
-      </>
-    )
-  }
+function App() {
+  return (
+    <>
+      {/* 使用類似HTML標記的方式來放置元件要呈現(渲染)的位置 */}
+      <AppClass />
+      <AppFunction />
+    </>
+  )
 }
 
-//輸出函式
+// 輸出元件(函式)
 export default App
