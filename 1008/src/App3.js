@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 
 import MyButtonOne from './components/MyButtonOne'
-import MyButtonTwo from './components/MyButtonTwo'
 
 function App(props) {
   const [text, setText] = useState('')
