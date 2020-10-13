@@ -1,13 +1,6 @@
-// 導入其它的模組
 import React, { useState } from 'react'
 
-function App(props) {
-  const [KG, setKG] = useState(0)
-  const [CM, setCM] = useState(0)
-  //const [BMI,setBMI]=useState(0)
-
-  const countBMI = (KG / ((CM / 100) * (CM / 100))).toFixed(2)
-
+function BMI(props) {
   return (
     <>
       體重：
@@ -30,6 +23,3 @@ function App(props) {
     </>
   )
 }
-
-// 輸出元件(函式)
-export default App
