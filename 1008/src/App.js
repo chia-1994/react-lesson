@@ -1,6 +1,8 @@
 // 導入其它的模組
 import React, { useState } from 'react'
 
+import MoneyInput from './components/MoneyInput'
+
 function App(props) {
   const [ntd, setNtd] = useState(0)
   const [usd, setUsd] = useState(0)
@@ -10,27 +12,21 @@ function App(props) {
 
   return (
     <>
-      新台幣：
-      <input
-        type="text"
-        value={ntd}
-        onChange={(e) => {
-          // 先得到更動後的值
-          const newNtd = e.target.value
-          setNtd(newNtd)
-          setUsd(ntd2Usd(ntd))
+      <MoneyInput
+        title="新台幣"
+        money={ntd}
+        setMoney={(value) => {
+          setNtd(value)
+          setUsd(ntd2Usd(value))
         }}
       />
       <br />
-      美金：
-      <input
-        type="text"
-        value={usd}
-        onChange={(e) => {
-          // 先得到更動後的值
-          const newUsd = e.target.value
-          setUsd(newUsd)
-          setNtd(usd2Ntd(usd))
+      <MoneyInput
+        title="美金"
+        money={usd}
+        setMoney={(value) => {
+          setUsd(value)
+          setNtd(usd2Ntd(value))
         }}
       />
     </>
