@@ -14,8 +14,10 @@ function App(props) {
       <input
         type="text"
         value={ntd}
-        onChange={(event) => {
-          setNtd(event.target.value)
+        onChange={(e) => {
+          // 先得到更動後的值
+          const newNtd = e.target.value
+          setNtd(newNtd)
           setUsd(ntd2Usd(ntd))
         }}
       />
@@ -24,8 +26,10 @@ function App(props) {
       <input
         type="text"
         value={usd}
-        onChange={(event) => {
-          setUsd(event.target.value)
+        onChange={(e) => {
+          // 先得到更動後的值
+          const newUsd = e.target.value
+          setUsd(newUsd)
           setNtd(usd2Ntd(usd))
         }}
       />
