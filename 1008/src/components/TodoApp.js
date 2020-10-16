@@ -26,6 +26,15 @@ function TodoApp(props) {
     }
   }
 
+  // 利用id值尋找對應的item的索引值，然後移出陣列
+  const handleDelete = (id) => {
+    //建立一個新的陣列，其中"不包含"要被移除的項目(用filter)
+    const newTodos = todos.filter((item, index) => item.id !== id)
+
+    // 設定回原本的todos
+    setTodos(newTodos)
+  }
+
   return (
     <>
       <h1 className="mt-5">範例：待辨事項</h1>
@@ -69,6 +78,7 @@ function TodoApp(props) {
                 onChange={() => handleCompleted(item.id)}
               />
               <del>{item.text}</del>
+              <button onClick={() => handleDelete(item.id)}>刪除</button>
             </li>
           ) : (
             <li key={item.text}>
@@ -78,6 +88,7 @@ function TodoApp(props) {
                 onChange={() => handleCompleted(item.id)}
               />
               {item.text}
+              <button onClick={() => handleDelete(item.id)}>刪除</button>
             </li>
           )
         )}
