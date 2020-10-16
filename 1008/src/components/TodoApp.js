@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react'
+import TodoAddForm from './todo/TodoAddForm'
+import TodoList from './todo/TodoList'
 
 function TodoApp(props) {
   const [todoInput, setTodoInput] = useState('')
@@ -38,61 +40,18 @@ function TodoApp(props) {
   return (
     <>
       <h1 className="mt-5">範例：待辨事項</h1>
-      <input
-        type="text"
-        value={todoInput}
-        onChange={(e) => setTodoInput(e.target.value)}
-        onKeyPress={(e) => {
-          //按enter可輸入  但輸入''不會輸入
-          if (e.key === 'Enter' && e.target.value !== '') {
-            // 建立一個新的todo項目
-            const newItem = {
-              id: +new Date(),
-              text: e.target.value,
-              completed: false,
-            }
-
-            //...展開運算符
-            //建立新的陣列（合併原本的todos陣列中的值）
-            const newTodos = [newItem, ...todos]
-
-            //設定todos狀態值
-            setTodos(newTodos)
-
-            //清空輸入框
-            setTodoInput('')
-          }
-        }}
+      <TodoAddForm
+        todoInput={todoInput}
+        setTodoInput={setTodoInput}
+        todos={todos}
+        setTodos={setTodos}
       />
       <hr />
-      <ul>
-        {/* map使用時通常子元素會要求唯一key值(id值)  */}
-        {/* 這裡用索引值作為key值(id值)  */}
-        {/* 依照每個項目的completed來控制呈現的樣子 */}
-        {todos.map((item, index) =>
-          item.completed ? (
-            <li key={item.text}>
-              <input
-                type="checkbox"
-                checked={item.completed}
-                onChange={() => handleCompleted(item.id)}
-              />
-              <del>{item.text}</del>
-              <button onClick={() => handleDelete(item.id)}>刪除</button>
-            </li>
-          ) : (
-            <li key={item.text}>
-              <input
-                type="checkbox"
-                checked={item.completed}
-                onChange={() => handleCompleted(item.id)}
-              />
-              {item.text}
-              <button onClick={() => handleDelete(item.id)}>刪除</button>
-            </li>
-          )
-        )}
-      </ul>
+      <TodoList
+        todos={todos}
+        handleCompleted={handleCompleted}
+        handleDelete={handleDelete}
+      />
     </>
   )
 }
