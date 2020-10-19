@@ -9,14 +9,28 @@ import TodoAppPage from './pages/TodoAppPage'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Profile from './pages/Profile'
 import About from './pages/About'
 import Product from './pages/Product'
+import Counter from './pages/Counter'
 import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   const [todos, setTodos] = useState([])
+
+  //控制是否登入
   const [isAuth, setIsAuth] = useState(false)
 
+  // for login usage
+  const [authUsername, setAuthUsername] = useState('')
+  const [authPassword, setAuthPassword] = useState('')
+
+  // for Register & Profile usage
+  const [name, setName] = useState('')
+  const [username, setUsername] = useState('test')
+  const [password, setPassword] = useState('123')
+  const [passwordComfirm, setPasswordComfirm] = useState('')
+  const [email, setEmail] = useState('')
   return (
     <Router>
       <>
@@ -30,10 +44,44 @@ function App() {
               <Home />
             </Route>
             <Route path="/login">
-              <Login isAuth={isAuth} setIsAuth={setIsAuth} />
+              <Login
+                isAuth={isAuth}
+                setIsAuth={setIsAuth}
+                authUsername={authUsername}
+                setAuthUsername={setAuthUsername}
+                authPassword={authPassword}
+                setAuthPassword={setAuthPassword}
+                username={username}
+                password={password}
+              />
             </Route>
             <Route path="/register">
-              <Register />
+              <Register
+                isAuth={isAuth}
+                name={name}
+                setName={setName}
+                username={username}
+                setUsername={setUsername}
+                password={password}
+                setPassword={setPassword}
+                passwordComfirm={passwordComfirm}
+                setPasswordComfirm={setPasswordComfirm}
+                email={email}
+                setEmail={setEmail}
+              />
+            </Route>
+            <Route path="/profile">
+              <Profile
+                isAuth={isAuth}
+                name={name}
+                setName={setName}
+                username={username}
+                setUsername={setUsername}
+                password={password}
+                setPassword={setPassword}
+                email={email}
+                setEmail={setEmail}
+              />
             </Route>
             <Route path="/todo">
               <TodoAppPage todos={todos} setTodos={setTodos} />
@@ -43,6 +91,9 @@ function App() {
             </Route>
             <Route path="/product/:id?">
               <Product isAuth={isAuth} />
+            </Route>
+            <Route path="/counter">
+              <Counter />
             </Route>
             {/* 404找不到網頁，需要放在switch路由表最後一個 */}
             <Route path="*">
