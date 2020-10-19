@@ -9,6 +9,7 @@ import TodoAppPage from './pages/TodoAppPage'
 import Home from './pages/Home'
 import About from './pages/About'
 import Product from './pages/Product'
+import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
   const [todos, setTodos] = useState([])
@@ -33,6 +34,9 @@ function App() {
             </Route>
             <Route path="/product/:id?">
               <Product />
+            </Route>
+            <Route path="*">
+              <NotFoundPage />
             </Route>
           </Switch>
         </MainContent>

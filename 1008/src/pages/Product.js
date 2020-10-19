@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from 'react'
-import { Link, Switch, withRouter } from 'react-router-dom'
+import { Link, Switch, useParams } from 'react-router-dom'
+import Breadcrumb from '../components/Breadcrumbs'
 
 function Product(props) {
+  //使用鉤子
+  let { id } = useParams()
   return (
     <>
       <h1>Product</h1>
-      <h3>{props.match.params.id}</h3>
+      <Breadcrumb />
+      <h3>{id}</h3>
     </>
   )
 }
 
-export default withRouter(Product)
+export default Product
