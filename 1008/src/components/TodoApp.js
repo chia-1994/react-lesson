@@ -4,6 +4,9 @@ import TodoList from './todo/TodoList'
 
 function TodoApp(props) {
   const [todoInput, setTodoInput] = useState('')
+  // 0=all, 1= (view completed = true), 2=(view completed =false)
+  const [viewFilter, setViewFilter] = useState(0)
+
   //將每個待辦事項改為物件值 { id: 1, text: 'string', completed: bool }
   const [todos, setTodos] = useState([
     { id: 1, text: '買蛋餅', completed: false, edited: false },
@@ -84,6 +87,10 @@ function TodoApp(props) {
         todos={todos}
         setTodos={setTodos}
       />
+      <hr />
+      <button>所有</button>
+      <button>已完成</button>
+      <button>未完成</button>
       <hr />
       <TodoList
         todos={todos}
