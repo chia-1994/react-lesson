@@ -13,6 +13,9 @@ import Profile from './pages/Profile'
 import About from './pages/About'
 import Product from './pages/Product'
 import Counter from './pages/Counter'
+import Cart from './pages/Cart'
+import ProductList from './pages/ProductList'
+
 import NotFoundPage from './pages/NotFoundPage'
 
 function App() {
@@ -94,6 +97,12 @@ function App() {
             </Route>
             <Route path="/counter">
               <Counter />
+            </Route>
+            <Route path="/productlist">
+              <ProductList />
+            </Route>
+            <Route path="/cart">
+              <Cart />
             </Route>
             {/* 404找不到網頁，需要放在switch路由表最後一個 */}
             <Route path="*">
