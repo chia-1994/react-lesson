@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker'
 
 //以下為redux
 //第一步：匯入createStore, combineReducers API
-import {createStore, combineReducers} from 'redux'
+import { createStore, combineReducers } from 'redux'
 
 // 匯入綁定react與redux用的最上層元件
 import { Provider } from 'react-redux'
