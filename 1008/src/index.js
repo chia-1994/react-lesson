@@ -6,7 +6,10 @@ import * as serviceWorker from './serviceWorker'
 
 //以下為redux
 //第一步：匯入createStore, combineReducers API
-import {createStore, combineeReducers} from 'redux'
+import {createStore, combineReducers} from 'redux'
+
+// 匯入綁定react與redux用的最上層元件
+import { Provider } from 'react-redux'
 
 //第二步：寫出reducer：純粹函式---給狀態、動作，回傳新的狀態
 //定義action
@@ -24,7 +27,7 @@ function counter(state = 0, action) {
 }
 // 第二之一：合併所有的reducers成一個大的reducer
 const rootReducer = combineReducers({
-  total: counter,
+  counter,
 })
 
 // 第三步：由rootReducer建立store
@@ -35,7 +38,10 @@ const store = createStore(
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* 最上層的react與redux綁定用的元件，屬性即為上面建立的store */}
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )
