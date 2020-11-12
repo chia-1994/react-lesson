@@ -4,10 +4,6 @@ import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 import ReactStars from 'react-rating-stars-component'
 
 function CommentApp(props) {
-  // const [todoInput, setTodoInput] = useState('')
-  // const [todos, setTodos] = useState(['買iphone 12 pro max', '學好react'])
-  //const [commentInput, setcommentInput] = useState()
-
   const [comment, setComment] = useState([])
   const [dataLoading, setDataLoading] = useState(false)
   const [name, setName] = useState('')
@@ -48,6 +44,7 @@ function CommentApp(props) {
   useEffect(() => {
     setTimeout(() => setDataLoading(false), 500)
   }, [comment])
+
   const loading = (
     <>
       <div className="d-flex justify-content-center">
@@ -122,7 +119,7 @@ function CommentApp(props) {
             if (review !== '') {
               // 建立一個新的Comment項目
               const newItem = {
-                id: +new Date(),
+                // id: +new Date(),
                 name: name,
                 title: title,
                 review: review,
@@ -146,38 +143,6 @@ function CommentApp(props) {
           送出評論
         </Button>
       </Form>
-    </>
-  )
-
-  const display = (
-    <>
-      <div className="customer-review">
-        {comment.map((comment, index) => {
-          return (
-            <>
-              <div className="porfile">
-                <div className="photo"></div>
-                <div className="info">
-                  <div className="name" key={comment.id}>
-                    {comment.name}
-                  </div>
-                  <div className="rating"></div>
-                  <div className="skintype" key={comment.id}>
-                    您的肌膚類型:{comment.skin_type}
-                  </div>
-                </div>
-              </div>
-              <Col xs={12} md={12}>
-                <div className="comment-content">
-                  <h6 key={comment.id}>{comment.title}</h6>
-                  <p key={comment.id}>{comment.review}</p>
-                  <div className="comment-time"></div>
-                </div>
-              </Col>
-            </>
-          )
-        })}
-      </div>
     </>
   )
 
@@ -212,6 +177,14 @@ function CommentApp(props) {
       // props.history.push('/product')
     }, 500)
   }
+
+  const handleDelete = (sid) => {
+    //建立一個新的陣列，其中"不包含"要被移除的項目(用filter)
+    const newComment = comment.filter((item, index) => item.sid !== sid)
+
+    setComment(newComment)
+  }
+
   return (
     <>
       <Container>
@@ -242,23 +215,24 @@ function CommentApp(props) {
           </div>
           {/* <div className="customer-review">{display}</div> */}
           <div className="customer-review">
-            {comment.map((value, index) => {
+            {comment.map((item, index) => {
               return (
                 <>
                   <div className="porfile">
                     <div className="photo"></div>
                     <div className="info">
-                      <div className="name">{value.name}</div>
+                      <div className="name">{item.name}</div>
                       <div className="rating"></div>
-                      <div className="skintype">您的肌膚類型:{value.skin}</div>
+                      <div className="skintype">您的肌膚類型:{item.skin}</div>
                     </div>
                   </div>
                   <Col xs={12} md={12}>
                     <div className="comment-content">
-                      <h6>{value.title}</h6>
-                      <p>{value.review}</p>
+                      <h6>{item.title} </h6>
+                      <p key={item.id}>{item.review}</p>
                       <div className="comment-time"></div>
                     </div>
+                    <button onClick={() => handleDelete(item.sid)}>刪除</button>
                   </Col>
                 </>
               )
