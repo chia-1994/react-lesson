@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './comment/old/Comment.sass'
 import { Container, Row, Col, Button, Form } from 'react-bootstrap'
+import ReactStars from 'react-rating-stars-component'
 
 function CommentApp(props) {
   // const [todoInput, setTodoInput] = useState('')
@@ -108,9 +109,9 @@ function CommentApp(props) {
             onChange={(e) => setSkin(e.target.value)}
           >
             <option value="">請選擇</option>
-            <option value="油性">油性</option>
-            <option value="混合肌">混合肌</option>
-            <option value="乾性">乾性</option>
+            <option value="1">油性</option>
+            <option value="2">混合肌</option>
+            <option value="3">乾性</option>
           </Form.Control>
         </Form.Group>
         <Button
@@ -119,9 +120,7 @@ function CommentApp(props) {
           variant="success"
           onClick={(event) => {
             if (review !== '') {
-              // 建立一個新的todo項目
-              // 建立新的陣列(合併原本的todos陣列中的值)
-              // const newItem = [e.target.value, ...todos]
+              // 建立一個新的Comment項目
               const newItem = {
                 id: +new Date(),
                 name: name,
@@ -129,11 +128,8 @@ function CommentApp(props) {
                 review: review,
                 skin: skin,
               }
-              // 建立新的todos陣列
-              // const newTodos = [newItem, ...todos]
+
               const newComment = [newItem, ...comment]
-              // 設定新的todos，變動呈現的列
-              // 設定todos狀態值
               setComment(newComment)
 
               // 清空輸入框
@@ -142,11 +138,8 @@ function CommentApp(props) {
               setTitle('')
               setReview('')
               setSkin('')
-
+              //儲存進資料庫
               addCommentToSever()
-              setTimeout(() => {
-                alert('儲存完成')
-              }, 500)
             }
           }}
         >
@@ -162,25 +155,25 @@ function CommentApp(props) {
         {comment.map((comment, index) => {
           return (
             <>
-              <div key={index}>
-                <div className="porfile">
-                  <div className="photo"></div>
-                  <div className="info">
-                    <div className="name">{comment.name}</div>
-                    <div className="rating"></div>
-                    <div className="skintype">
-                      您的肌膚類型:{comment.skin_type}
-                    </div>
+              <div className="porfile">
+                <div className="photo"></div>
+                <div className="info">
+                  <div className="name" key={comment.id}>
+                    {comment.name}
+                  </div>
+                  <div className="rating"></div>
+                  <div className="skintype" key={comment.id}>
+                    您的肌膚類型:{comment.skin_type}
                   </div>
                 </div>
-                <Col xs={12} md={12}>
-                  <div className="comment-content">
-                    <h6>{comment.title}</h6>
-                    <p>{comment.review}</p>
-                    <div className="comment-time"></div>
-                  </div>
-                </Col>
               </div>
+              <Col xs={12} md={12}>
+                <div className="comment-content">
+                  <h6 key={comment.id}>{comment.title}</h6>
+                  <p key={comment.id}>{comment.review}</p>
+                  <div className="comment-time"></div>
+                </div>
+              </Col>
             </>
           )
         })}
@@ -190,7 +183,7 @@ function CommentApp(props) {
 
   async function addCommentToSever() {
     //const newData = { name, email, title, review }
-    const newData = { name, email, title, review }
+    const newData = { name, email, skin, title, review }
     // 連接的伺服器資料網址
     const url = 'http://localhost:3000/comment/add'
 
@@ -215,7 +208,7 @@ function CommentApp(props) {
     //直接在一段x秒關掉指示器
     setTimeout(() => {
       setDataLoading(false)
-      alert('儲存完成')
+      alert('已新增評論')
       // props.history.push('/product')
     }, 500)
   }
@@ -237,7 +230,7 @@ function CommentApp(props) {
 
             <div className="total-reviews">
               <div className="total-rating">
-                <i class="fas fa-star"></i>
+                <i className="fas fa-star"></i>
               </div>
               <div className="total-score">
                 <h2>5</h2>
